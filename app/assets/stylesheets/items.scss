@@ -1,0 +1,62 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+p{
+  margin: 0;
+}
+
+body {
+  background-color: #F0F0F0;
+  font-family: Sans-Serif;
+  font-size: 16px;
+}
+
+.list{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.list_item {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: white;
+  color: #0A2B4E;
+  border-top: 1px solid lightgray;
+  p{
+    display: inline-block;
+  }
+}
+
+.list_input{
+  background-color: white;
+  padding: 20px 30px;
+  span{
+
+    vertical-align: middle;
+  }
+  input{
+    font-size: 1em;
+    width: 90%;
+    padding: 10px;
+    border: none;
+    outline: none;
+  }
+}
+
+.list_title{
+  background-color: #0A2B4E;
+  padding: 30px;
+  color: white;
+}
+
+.icon{
+  color: #D3D3D3;
+  cursor: pointer;
+}
+
+.check{
+  vertical-align: middle;
+  margin-right: 10px;
+}
