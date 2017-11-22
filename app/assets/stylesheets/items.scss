@@ -60,3 +60,12 @@ body {
   vertical-align: middle;
   margin-right: 10px;
 }
+
+@media (max-width: 900px ) {
+  .list{
+    width: 95%;
+  }
+  .list_input input{
+    width:70%;
+  }
+}

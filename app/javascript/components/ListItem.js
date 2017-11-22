@@ -35,7 +35,6 @@ class ListItem extends Component {
                         style={{ color: `${item.checked ? '#c7f0bb' : '#D3D3D3'}` }}
                   />
                   <p>{item.text}</p>
-                  <p>{' -- '}{item.priority}</p>
                 </div>
                 <Icon
                   name='trash-o'
