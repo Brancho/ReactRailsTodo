@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
     create_table :items do |t|
       t.string :text
       t.boolean :checked
-      t.integer :priority
+      t.float :priority
 
       t.timestamps
     end

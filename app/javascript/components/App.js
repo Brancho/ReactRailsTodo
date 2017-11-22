@@ -5,19 +5,11 @@ import reduxThunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import List from './List'
 
-
-
-
-
-
 const App = (props) => {
-
-  const initialState = props;
-
   return(
     <Provider store={createStore(
       rootReducer,
-      initialState,
+      props,
       applyMiddleware(reduxThunk)
     )}>
       <List />

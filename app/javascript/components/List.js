@@ -1,43 +1,33 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import axios from 'axios';
 import ListItem from './ListItem'
 import NewItem from './NewItem'
 import { connect } from 'react-redux'
+import { reorderList, addItem } from '../actions'
 
 
 class List extends Component {
-  constructor(props){
-    super(props);
 
-    this.onDragEnd = this.onDragEnd.bind(this);
-  }
-
-  onDragEnd(result) {
-    if (!result.destination) {
+  onDragEnd = ({ source, destination }) => {
+    const { todos, reorderList } = this.props;
+    if (!destination) {
       return;
     }
 
-    const destination = result.destination.index;
-    const source = result.source.index;
-    const { todos } = this.props;
-    let priority = todos[destination].priority;
+    let priority = todos[destination.index].priority;
+    source.index > destination.index ? priority++ : priority--;
+    todos[source.index].priority = priority;
 
-    source > destination ? priority++ : priority--;
-    todos[source].priority = priority;
-    axios.patch(`/items/${todos[source].id}.json`, {item: todos[source]} ).then(response => console.log(response));
-  }
+    reorderList(todos[source.index])
+  };
 
   render() {
-
-    console.log(this.props.todos)
-
     return (
       <div className="list">
         <div className="list_title">
           <p>Task Manager</p>
         </div>
-        <NewItem />
+        <NewItem addItem={(item) => this.props.addItem(item)} />
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
@@ -58,11 +48,7 @@ class List extends Component {
   }
 }
 
-function mapStateToProps(state){
- return{
-   todos: state.todos
- }
-}
 
-export default connect(mapStateToProps)(List);
+const mapStateToProps = ({todos}) => ({todos});
+export default connect(mapStateToProps, {reorderList, addItem})(List);
 

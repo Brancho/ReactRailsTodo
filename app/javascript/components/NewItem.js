@@ -1,35 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Icon from 'react-fontawesome';
-import { addItem } from '../actions'
-import {connect} from 'react-redux'
 
+const NewItem = ({addItem}) => {
 
-class NewItem extends Component{
-
-  _handleKeyPress = (e) => {
-    e.key === 'Enter' ? this.createItem() : ''
-  };
-
-  createItem = () => {
-    if(this.itemInput.value){
-      this.props.addItem(this.itemInput.value);
+  const createItem = () => {
+    if (this.itemInput.value) {
+      addItem(this.itemInput.value);
       this.itemInput.value = '';
     }
   };
 
-  render(){
-    return(
-      <div className="list_input">
-        <Icon
-          name='plus'
-          size='2x'
-          className="icon"
-          onClick={this.createItem}
-        />
-        <input type="text" onKeyPress={this._handleKeyPress} ref={(input) => { this.itemInput = input; }}/>
-      </div>
-    )
-  }
+  return (
+    <div className="list_input">
+      <Icon name='plus' size='2x' className="icon" onClick={() => createItem()}/>
+      <input type="text" onKeyPress={(e) => e.key === 'Enter' ? createItem() : null} ref={(input) => {
+        this.itemInput = input;
+      }}/>
+    </div>
+  )
 }
 
-export default connect(null, {addItem})(NewItem)
+export default NewItem

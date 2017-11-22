@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all.order(priority: :desc)
+    @items = Item.all.order(priority: :desc, updated_at: :asc)
   end
 
   # GET /items/1

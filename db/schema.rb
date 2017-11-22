@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171121124843) do
   create_table "items", force: :cascade do |t|
     t.string "text"
     t.boolean "checked"
-    t.integer "priority"
+    t.float "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
