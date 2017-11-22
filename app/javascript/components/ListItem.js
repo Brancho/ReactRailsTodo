@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import Icon from 'react-fontawesome';
 import {Draggable} from 'react-beautiful-dnd';
-import axios from 'axios';
+import { toggleChecked, removeItem } from '../actions'
+import {connect} from 'react-redux'
+
 
 
 const getItemStyle = (draggableStyle, isDragging) => ({
@@ -11,15 +13,6 @@ const getItemStyle = (draggableStyle, isDragging) => ({
 
 
 class ListItem extends Component {
-
-  toggleCheck = (item) => () => {
-    item.checked ? item.checked = false : item.checked = true;
-    axios.patch(`/items/${item.id}.json`, {item} ).then(response => console.log(response));
-  };
-
-  removeItem = (item) => () => {
-    axios.delete(`/items/${item.id}.json`, {item} ).then(response => console.log(response));
-  };
 
   render() {
     const {item} = this.props;
@@ -38,7 +31,7 @@ class ListItem extends Component {
                   <Icon name={`${item.checked ? 'check-circle' : 'check-circle-o' }`}
                         size='2x'
                         className="icon check"
-                        onClick={this.toggleCheck(item)}
+                        onClick={() => this.props.toggleChecked(item)}
                         style={{ color: `${item.checked ? '#c7f0bb' : '#D3D3D3'}` }}
                   />
                   <p>{item.text}</p>
@@ -47,7 +40,7 @@ class ListItem extends Component {
                   name='trash-o'
                   size='2x'
                   className="icon"
-                  onClick={this.removeItem(item)}
+                  onClick={() => this.props.removeItem(item)}
                 />
               </div>
             </div>
@@ -60,4 +53,4 @@ class ListItem extends Component {
 
 }
 
-export default ListItem
+export default connect(null, { toggleChecked, removeItem })(ListItem)

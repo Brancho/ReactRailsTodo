@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Icon from 'react-fontawesome';
-import axios from 'axios';
+import { addItem } from '../actions'
+import {connect} from 'react-redux'
+
 
 class NewItem extends Component{
 
@@ -10,7 +12,7 @@ class NewItem extends Component{
 
   createItem = () => {
     if(this.itemInput.value){
-      axios.post(`/items.json`, {item: { text: this.itemInput.value }} ).then(response => console.log(response));
+      this.props.addItem(this.itemInput.value);
       this.itemInput.value = '';
     }
   };
@@ -30,4 +32,4 @@ class NewItem extends Component{
   }
 }
 
-export default NewItem
+export default connect(null, {addItem})(NewItem)

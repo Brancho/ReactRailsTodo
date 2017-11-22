@@ -3,6 +3,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
 import ListItem from './ListItem'
 import NewItem from './NewItem'
+import { connect } from 'react-redux'
 
 
 class List extends Component {
@@ -28,6 +29,9 @@ class List extends Component {
   }
 
   render() {
+
+    console.log(this.props.todos)
+
     return (
       <div className="list">
         <div className="list_title">
@@ -54,5 +58,11 @@ class List extends Component {
   }
 }
 
-export default List;
+function mapStateToProps(state){
+ return{
+   todos: state.todos
+ }
+}
+
+export default connect(mapStateToProps)(List);
 
